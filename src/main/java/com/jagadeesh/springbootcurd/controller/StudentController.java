@@ -66,14 +66,14 @@ public class StudentController {
 	}
 
 	@DeleteMapping("/api/students/{id}")
-	public ResponseEntity<Student> deleteStudent(@PathVariable long id) {
+	public ResponseEntity<Void> deleteStudent(@PathVariable long id) {
 //		repository.deleteById(id);
 //		return new ResponseEntity<>(HttpStatus.OK);
 		
 		Optional<Student> student = repository.findById(id);
 		if(student.isPresent()) {
 			repository.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
